@@ -7,6 +7,15 @@ class BookList extends React.Component{
     }
 }
 
+class CustomBookAPI extends React.Component{
+    render(){
+        return <div>
+
+         <h3>Testing</h3>
+        </div>
+    }
+}
+
 class GoogleBooks extends React.Component{
     constructor(props){
         super(props)
@@ -36,6 +45,7 @@ class GoogleBooks extends React.Component{
         console.log(this.queryBooks());
         return( <div>
          <h1> HELLO </h1>
+         <CustomBookAPI/>
          </div>)
     }
 
