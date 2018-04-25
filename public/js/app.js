@@ -3,11 +3,23 @@
 class CustomBookAPI extends React.Component{
     render(){
         return <div>
-         <h3>Testing</h3>
+         <h3>Testing Custom BookApi</h3>
         </div>
     }
 }
 
+
+class BookForm extends React.Component{
+    render(){
+        return <div><h3>Testing BookForm</h3></div>
+    }
+}
+
+class Book extends React.Component{
+    render() {
+        return <div><h3>Testing Book</h3></div>
+    }
+}
 
 class BookList extends React.Component{
     render(){
@@ -101,6 +113,8 @@ class GoogleBooks extends React.Component{
              <h1> HELLO</h1>
              <CustomBookAPI/>
              <BookList books={this.state.foundBooks}/>
+             <Book books={this.state.foundBooks}/>
+             <BookForm books={this.state.foundBooks}/>
          </div>)
     }
 
