@@ -40,3 +40,8 @@ class GoogleBooks extends React.Component{
     }
 
 }
+
+ReactDOM.render(
+    <GoogleBooks/>,
+    document.querySelector('main')
+)
