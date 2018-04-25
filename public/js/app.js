@@ -1,5 +1,11 @@
 
 class BookList extends React.Component{
+    constructor(props){
+        super(props)
+
+    }
+
+
     render(){
         return <div>
 
@@ -7,24 +13,27 @@ class BookList extends React.Component{
     }
 }
 
+
 class CustomBookAPI extends React.Component{
     render(){
         return <div>
-
          <h3>Testing</h3>
         </div>
     }
 }
 
+
 class GoogleBooks extends React.Component{
     constructor(props){
         super(props)
         this.queryBooks = this.queryBooks.bind(this)
-        this.state ={query:'harry+potter'}
+        this.getbooks = this.getbooks.bind(this)
+        this.state ={query:'harry+potter', foundBooks:"testing state found books"}
     }
 
     componentDidMount(){
         {this.queryBooks(this.state.query)}
+        this.getbooks()
     }
 
     queryBooks(query){
@@ -40,11 +49,22 @@ class GoogleBooks extends React.Component{
         )
     }
 
+
+
+
+    getbooks(){
+        fetch('/books').then(response=>{response.json().then(data=>{
+            console.log(data)
+            this.setState({foundBooks:data})
+        })})
+    }
+
+
     render(){
 
-        console.log(this.queryBooks());
+
         return( <div>
-         <h1> HELLO </h1>
+         <h1> {this.state.foundBooks[0].title} </h1>
          <CustomBookAPI/>
          </div>)
     }
