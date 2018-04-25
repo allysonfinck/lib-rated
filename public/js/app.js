@@ -1,18 +1,4 @@
 
-class BookList extends React.Component{
-    constructor(props){
-        super(props)
-
-    }
-
-
-    render(){
-        return <div>
-
-        </div>
-    }
-}
-
 
 class CustomBookAPI extends React.Component{
     render(){
@@ -23,6 +9,27 @@ class CustomBookAPI extends React.Component{
 }
 
 
+class BookList extends React.Component{
+    render(){
+            console.log(this.props.books)
+        return <div>
+            <h3>Testing BookList</h3>
+            <ul>
+                {this.props.books.map(
+                    (book, index)=>{
+                        return <li>{book.title}, {book.author},{book.genre}</li>
+                    }
+                )}
+
+            </ul>
+        </div>
+    }
+}
+
+// =============================================================================
+//                       PRIMARY API COMPONENT
+// =============================================================================
+
 class GoogleBooks extends React.Component{
     constructor(props){
         super(props)
@@ -31,7 +38,7 @@ class GoogleBooks extends React.Component{
         this.addBooks = this.addBooks.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
 
-        this.state ={query:'harry+potter', foundBooks:"testing state found books"}
+        this.state ={query:'harry+potter', foundBooks:[]}
     }
 
     componentDidMount(){
@@ -39,8 +46,9 @@ class GoogleBooks extends React.Component{
         this.getBooks()
     }
 
+//======================  GOOGLE API ====================================//
+
     queryBooks(query){
-        console.log(this);
         fetch('https://www.googleapis.com/books/v1/volumes?q='+ query)
         .then((response)=>{
                 response.json().then(
@@ -54,7 +62,7 @@ class GoogleBooks extends React.Component{
 
 
 
-//====================== CRUD ROUTES FOR CUSTOM API ====================================//
+//====================== CRUD ROUTES FOR CUSTOM API =============================
     getBooks(){
         fetch('/books').then(response=>{response.json().then(data=>{
             console.log(data)
@@ -74,6 +82,7 @@ class GoogleBooks extends React.Component{
     .then(response=>console.log(response)).catch(error=>console.log(error))
     }
 
+
     deleteBook(book, index){
         fetch('/books/'+ book.id, {method:'DELETE'})
         .then(
@@ -85,12 +94,13 @@ class GoogleBooks extends React.Component{
         )
     }
 
-// ===============================================================================
+// --------------------------------------
     render(){
 
         return( <div>
-         <h1> {this.state.foundBooks[0].title} </h1>
-         <CustomBookAPI/>
+             <h1> HELLO</h1>
+             <CustomBookAPI/>
+             <BookList books={this.state.foundBooks}/>
          </div>)
     }
 
