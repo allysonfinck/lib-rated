@@ -3,6 +3,8 @@
 ### Project Team: Allyson Finck, Teila Angel, Eric Sanchez
 #####Allyson made a change
 #####Eric made a change
+#####Teila made a change
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
