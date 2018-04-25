@@ -22,7 +22,7 @@ class Favorite
   def self.create(opts = {})
     results = DB.exec(
       <<-SQL
-        INSERT INTO favorite (book_id, user_id)
+        INSERT INTO favorites (book_id, user_id)
         VALUES (#{opts["book_id"]}, #{opts["user_id"]})
         RETURNING id, book_id, user_id;
       SQL
