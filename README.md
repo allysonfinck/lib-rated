@@ -1,7 +1,8 @@
 # README
 # Libr\Rated
-### Project Team: Allyson Finck, Teila Angel, Eric Sanchez  
+### Project Team: Allyson Finck, Teila Angel, Eric Sanchez
 #####Allyson made a change
+#####Eric made a change
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
