@@ -27,13 +27,16 @@ class GoogleBooks extends React.Component{
     constructor(props){
         super(props)
         this.queryBooks = this.queryBooks.bind(this)
-        this.getbooks = this.getbooks.bind(this)
+        this.getBooks = this.getBooks.bind(this)
+        this.addBooks = this.addBooks.bind(this)
+        this.deleteBook = this.deleteBook.bind(this)
+
         this.state ={query:'harry+potter', foundBooks:"testing state found books"}
     }
 
     componentDidMount(){
         {this.queryBooks(this.state.query)}
-        this.getbooks()
+        this.getBooks()
     }
 
     queryBooks(query){
@@ -52,7 +55,7 @@ class GoogleBooks extends React.Component{
 
 
 //====================== CRUD ROUTES FOR CUSTOM API ====================================//
-    getbooks(){
+    getBooks(){
         fetch('/books').then(response=>{response.json().then(data=>{
             console.log(data)
             this.setState({foundBooks:data})
@@ -60,7 +63,7 @@ class GoogleBooks extends React.Component{
     }
 
 
-    addbooks(){
+    addBooks(){
         fetch('/books', {body: JSON.stringify(), method: 'POST',
                     headers:
                         {
@@ -71,6 +74,16 @@ class GoogleBooks extends React.Component{
     .then(response=>console.log(response)).catch(error=>console.log(error))
     }
 
+    deleteBook(book, index){
+        fetch('/books/'+ book.id, {method:'DELETE'})
+        .then(
+            data=>{
+                this.setState(
+                    {foundbooks:[ ...this.state.foundBooks.slice(0, index), ...this.state.foundBooks.slice(index+1)]}
+                )
+            }
+        )
+    }
 
 // ===============================================================================
     render(){
