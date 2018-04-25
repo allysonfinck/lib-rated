@@ -51,7 +51,7 @@ class GoogleBooks extends React.Component{
 
 
 
-
+//====================== CRUD ROUTES FOR CUSTOM API ====================================//
     getbooks(){
         fetch('/books').then(response=>{response.json().then(data=>{
             console.log(data)
@@ -60,8 +60,20 @@ class GoogleBooks extends React.Component{
     }
 
 
-    render(){
+    addbooks(){
+        fetch('/books', {body: JSON.stringify(), method: 'POST',
+                    headers:
+                        {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        }
+    })
+    .then(response=>console.log(response)).catch(error=>console.log(error))
+    }
 
+
+// ===============================================================================
+    render(){
 
         return( <div>
          <h1> {this.state.foundBooks[0].title} </h1>
@@ -70,6 +82,8 @@ class GoogleBooks extends React.Component{
     }
 
 }
+
+
 
 ReactDOM.render(
     <GoogleBooks/>,
