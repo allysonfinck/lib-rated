@@ -28,7 +28,8 @@ class BookForm extends React.Component{
     formChange(event){
         console.log(event.target.id);
         console.log(event.target.value);
-        // this.setState({[event.target.id]:event.target.value})
+
+        this.setState({[event.target.id]:event.target.value})
     }
 
     formSubmit(event){
@@ -41,7 +42,7 @@ class BookForm extends React.Component{
         return <div>
         <h3>Testing BookForm</h3>
         <form>
-            <input onChange={()=>this.formChange(event)} type="text"  placeholder="title" id="title" /> <br/>
+            <input onChange={()=>this.formChange(event)} type="text"  placeholder="title" id="title"/> <br/>
             <input type="text"  placeholder="author"  id="author"/> <br/>
             <input type="text"  placeholder="publisher"  id ="publisher"/> <br/>
             <input type="text"  placeholder="date_published" id="date_published"/> <br/>
@@ -106,6 +107,7 @@ class GoogleBooks extends React.Component{
         this.getBook = this.getBook.bind(this)
         this.addBooks = this.addBooks.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
+        this.createBook =this.createBook.bind(this)
         // this.formSubmit =this.formSubmit.bind(this)
         // this.formChange= this.formChange.bind(this)
 
@@ -148,6 +150,12 @@ class GoogleBooks extends React.Component{
     }
 
 
+    createBook(book){
+        const updatedBooks = this.state.foundBooks
+        updatedPeople.unshift(book)
+        this.setState({foundBooks: updatedBooks})
+
+    }
 
     addBooks(){
         fetch('/books', {body: JSON.stringify(), method: 'POST',
