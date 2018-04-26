@@ -11,7 +11,19 @@ class CustomBookAPI extends React.Component{
 
 class BookForm extends React.Component{
     render(){
-        return <div><h3>Testing BookForm</h3></div>
+        return <div>
+        <h3>Testing BookForm</h3>
+        <form>
+            <input type="text"  placeholder="title" /> <br/>
+            <input type="text"  placeholder="author" /> <br/>
+            <input type="text"  placeholder="publisher" /> <br/>
+            <input type="text"  placeholder="date_published" /> <br/>
+            <input type="text"  placeholder="description" />  <br/>
+            <input type="text"  placeholder="cover_art" /> <br/>
+
+            <input type="Submit" value="Add Book" />
+        </form>
+        </div>
     }
 }
 
@@ -23,6 +35,7 @@ class Book extends React.Component{
             <h3>{this.props.book.title}</h3>
 
             <p>{this.props.book.description}</p>
+            <p>{this.props.book.cover_art}</p>
 
             <ul>
                 <li>{this.props.book.author}</li>
