@@ -17,11 +17,12 @@ class BookForm extends React.Component{
 
 class Book extends React.Component{
     render() {
+
         return <div>
             <h3>Testing Book</h3>
             <h3>{this.props.book.title}</h3>
-            
-            <p>{this.book.description}</p>
+
+            <p>{this.props.book.description}</p>
 
             <ul>
                 <li>{this.props.book.author}</li>
@@ -33,15 +34,16 @@ class Book extends React.Component{
     }
 }
 
+// <li onClick={()=>{this.props.getBook(book)}}>{book.title}</li>
 class BookList extends React.Component{
     render(){
-            console.log(this.props.books)
+            console.log(this.props.getBook)
         return <div>
             <h3>Testing BookList</h3>
             <ul>
                 {this.props.books.map(
                     (book, index)=>{
-                        return <li onClick={()=>this.props.getBook(book)}>{book.title}, {book.author},{book.genre}</li>
+                        return <li onClick={()=>this.props.getBook(book)}>{book.title}</li>
                     }
                 )}
 
@@ -59,7 +61,7 @@ class GoogleBooks extends React.Component{
         super(props)
         this.queryBooks = this.queryBooks.bind(this)
         this.getBooks = this.getBooks.bind(this)
-        this.getBook = this.Book.bind(this)
+        this.getBook = this.getBook.bind(this)
         this.addBooks = this.addBooks.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
 
@@ -97,7 +99,7 @@ class GoogleBooks extends React.Component{
 
 
 
-    getBook(books){
+    getBook(book){
         this.setState({selectedBook:book})
     }
 
@@ -128,7 +130,7 @@ class GoogleBooks extends React.Component{
         )
     }
 
-// --------------------------------------
+// *******************************************
     render(){
 
         return( <div>
@@ -136,7 +138,7 @@ class GoogleBooks extends React.Component{
              <CustomBookAPI/>
              <BookList
                  books={this.state.foundBooks}
-                 book={this.getBook}
+                 getBook={this.getBook}
             />
              <Book
                  book ={this.state.selectedBook}
