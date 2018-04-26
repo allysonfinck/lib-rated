@@ -10,22 +10,51 @@ class CustomBookAPI extends React.Component{
 
 
 class BookForm extends React.Component{
+    constructor(props){
+        super(props)
+        this.formChange = this.formChange.bind(this)
+        this.formSubmit = this.formSubmit.bind(this)
+        this.state ={
+            title:"",
+            author:"",
+            publisher:"",
+            date_published:"",
+            description:"",
+            cover_art:""
+        }
+    }
+
+
+    formChange(event){
+        console.log(event.target.id);
+        console.log(event.target.value);
+        // this.setState({[event.target.id]:event.target.value})
+    }
+
+    formSubmit(event){
+        // event.target.preventDefault();
+        // this.setState({toggleState:!toggleState})
+    }
+
     render(){
+        console.log(this);
         return <div>
         <h3>Testing BookForm</h3>
         <form>
-            <input type="text"  placeholder="title" /> <br/>
-            <input type="text"  placeholder="author" /> <br/>
-            <input type="text"  placeholder="publisher" /> <br/>
-            <input type="text"  placeholder="date_published" /> <br/>
-            <input type="text"  placeholder="description" />  <br/>
-            <input type="text"  placeholder="cover_art" /> <br/>
+            <input onChange={()=>this.formChange(event)} type="text"  placeholder="title" id="title" /> <br/>
+            <input type="text"  placeholder="author"  id="author"/> <br/>
+            <input type="text"  placeholder="publisher"  id ="publisher"/> <br/>
+            <input type="text"  placeholder="date_published" id="date_published"/> <br/>
+            <input type="text"  placeholder="description"  id="description"/>  <br/>
+            <input type="text"  placeholder="cover_art" id="cover_art"/> <br/>
 
             <input type="Submit" value="Add Book" />
         </form>
         </div>
     }
 }
+
+
 
 class Book extends React.Component{
     render() {
@@ -50,7 +79,7 @@ class Book extends React.Component{
 // <li onClick={()=>{this.props.getBook(book)}}>{book.title}</li>
 class BookList extends React.Component{
     render(){
-            console.log(this.props.getBook)
+            {/*} console.log(this.props.getBook)*/}
         return <div>
             <h3>Testing BookList</h3>
             <ul>
@@ -77,8 +106,10 @@ class GoogleBooks extends React.Component{
         this.getBook = this.getBook.bind(this)
         this.addBooks = this.addBooks.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
+        // this.formSubmit =this.formSubmit.bind(this)
+        // this.formChange= this.formChange.bind(this)
 
-        this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}}
+        this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}, toggleState:false}
     }
 
     componentDidMount(){
@@ -105,7 +136,7 @@ class GoogleBooks extends React.Component{
 //====================== CRUD ROUTES FOR CUSTOM API =============================
     getBooks(){
         fetch('/books').then(response=>{response.json().then(data=>{
-            console.log(data)
+            // console.log(data)
             this.setState({foundBooks:data})
         })})
     }
@@ -156,7 +187,7 @@ class GoogleBooks extends React.Component{
              <Book
                  book ={this.state.selectedBook}
              />
-             <BookForm books={this.state.foundBooks}/>
+             <BookForm />
          </div>)
     }
 
