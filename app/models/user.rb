@@ -1,5 +1,5 @@
 class User
-  attr_reader :id, :username, :password
+  attr_reader :id, :username, :password, :favorites
 
   DB = PG.connect(host: 'localhost', port: 5432, dbname: 'lib_rated')
 
@@ -7,16 +7,87 @@ class User
     @id = opts['id'].to_i
     @username = opts['username']
     @password = opts['password']
+    if opts["favorites"]
+      @favorites = opts["favorites"]
+    end
   end
 
   def self.all
-    results = DB.exec("SELECT * FROM users;")
-    return results.map {|result| User.new(result)}
+    results = DB.exec(
+      <<-SQL
+        SELECT
+          users.*,
+          favorites.book_id AS favorited_book_id,
+          books.title AS favorited_book_title,
+          books.author AS favorited_book_author,
+          books.cover_art AS favorited_book_cover_art
+        FROM users
+        LEFT JOIN favorites
+          ON favorites.user_id = users.id
+        LEFT JOIN books
+          ON favorites.book_id = books.id;
+      SQL
+    )
+    users = []
+    last_person_id = nil
+    results.map do |result|
+      if result["id"] != last_person_id
+        new_user = User.new({
+          "id" => result["id"],
+          "username" => result["username"],
+          "password" => result["password"],
+          "favorites" => []
+          })
+        users.push(new_user)
+        last_person_id = result["id"]
+      end
+      if result["favorited_book_id"]
+        new_book = Book.new({
+          "id" => result["favorited_book_id"],
+          "title" => result["favorited_book_title"],
+          "author" => result["favorited_book_author"],
+          "cover_art" => result["favorited_book_cover_art"]
+        })
+        users.last.favorites.push(new_book)
+      end
+    end
+    return users
   end
 
   def self.find(id)
-    results = DB.exec("SELECT * FROM users WHERE id=#{id};")
-    return User.new(results.first)
+    results = DB.exec(
+      <<-SQL
+        SELECT
+          users.*,
+          favorites.book_id AS favorited_book_id,
+          books.title AS favorited_book_title
+        FROM users
+        LEFT JOIN favorites
+          ON favorites.user_id = users.id
+        LEFT JOIN books
+          ON favorites.book_id = books.id
+        WHERE users.id = #{id};
+      SQL
+    )
+    result = results.first
+    favorites = []
+    results.map do |result|
+      if result["favorited_book_id"]
+        favorites.push(Book.new({
+          "id" => result["favorited_book_id"],
+          "title" => result["favorited_book_title"],
+          "author" => result["favorited_book_author"],
+          "cover_art" => result["favorited_book_cover_art"]
+          }))
+      end
+    end
+    user = User.new({
+      "id" => result["id"],
+      "username" => result["username"],
+      "password" => result["password"],
+      "favorites" => favorites
+    })
+    return user
   end
 
   def self.create(opts = {})
