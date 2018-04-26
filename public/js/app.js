@@ -17,7 +17,19 @@ class BookForm extends React.Component{
 
 class Book extends React.Component{
     render() {
-        return <div><h3>Testing Book</h3></div>
+        return <div>
+            <h3>Testing Book</h3>
+            <h3>{this.props.book.title}</h3>
+            
+            <p>{this.book.description}</p>
+
+            <ul>
+                <li>{this.props.book.author}</li>
+                <li>{this.props.book.publisher}</li>
+                <li>{this.props.book.date_published} </li>
+            </ul>
+
+        </div>
     }
 }
 
@@ -29,7 +41,7 @@ class BookList extends React.Component{
             <ul>
                 {this.props.books.map(
                     (book, index)=>{
-                        return <li>{book.title}, {book.author},{book.genre}</li>
+                        return <li onClick={()=>this.props.getBook(book)}>{book.title}, {book.author},{book.genre}</li>
                     }
                 )}
 
@@ -47,10 +59,11 @@ class GoogleBooks extends React.Component{
         super(props)
         this.queryBooks = this.queryBooks.bind(this)
         this.getBooks = this.getBooks.bind(this)
+        this.getBook = this.Book.bind(this)
         this.addBooks = this.addBooks.bind(this)
         this.deleteBook = this.deleteBook.bind(this)
 
-        this.state ={query:'harry+potter', foundBooks:[]}
+        this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}}
     }
 
     componentDidMount(){
@@ -83,6 +96,13 @@ class GoogleBooks extends React.Component{
     }
 
 
+
+    getBook(books){
+        this.setState({selectedBook:book})
+    }
+
+
+
     addBooks(){
         fetch('/books', {body: JSON.stringify(), method: 'POST',
                     headers:
@@ -93,6 +113,8 @@ class GoogleBooks extends React.Component{
     })
     .then(response=>console.log(response)).catch(error=>console.log(error))
     }
+
+
 
 
     deleteBook(book, index){
@@ -112,8 +134,13 @@ class GoogleBooks extends React.Component{
         return( <div>
              <h1> HELLO</h1>
              <CustomBookAPI/>
-             <BookList books={this.state.foundBooks}/>
-             <Book books={this.state.foundBooks}/>
+             <BookList
+                 books={this.state.foundBooks}
+                 book={this.getBook}
+            />
+             <Book
+                 book ={this.state.selectedBook}
+             />
              <BookForm books={this.state.foundBooks}/>
          </div>)
     }
