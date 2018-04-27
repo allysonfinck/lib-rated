@@ -7,9 +7,15 @@ class Book
     @id = opts['id'].to_i
     @title = opts['title']
     @author = opts['author']
-    @date_published = opts['date_published']
-    @genre = opts['genre']
-    @description = opts['description']
+    if opts["date_published"]
+      @date_published = opts['date_published']
+    end
+    if opts["genre"]
+      @genre = opts['genre']
+    end
+    if opts["description"]
+      @description = opts['description']
+    end
     @cover_art = opts['cover_art']
   end
 
