@@ -12,7 +12,7 @@ class Index extends React.Component {
 
   toggleState(pg1, pg2, pg3, pg4) {
     this.setState({
-      [pg1]: !this.state[pg1],
+      [pg1]: true,
       [pg2]: false,
       [pg3]: false,
       [pg4]: false
