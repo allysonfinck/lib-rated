@@ -1,5 +1,7 @@
 {
   "name": "lib-rated",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react-router": "^4.2.0"
+  }
 }
