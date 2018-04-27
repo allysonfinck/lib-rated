@@ -7,10 +7,11 @@ class Us extends React.Component {
           <h3 className="header">Eric Sanchez</h3>
           <div className="card horizontal cardfave">
             <div className="card-image">
-              <img src="../images/Profile BW 2016.jpg" alt="Eric" />
+              <img src="../images/EricProfile.jpeg" alt="Eric" />
             </div>
             <div className="card-stacked">
               <div className="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
               </div>
               <div className="card-action">
@@ -23,10 +24,11 @@ class Us extends React.Component {
           <h3 className="header">Allyson Finck</h3>
           <div className="card horizontal cardfave">
             <div className="card-image">
-              <img src="../images/AllysonFinckProfile.jpeg" alt="Allyson" />
+              <img src="../images/AllysonProfile.jpeg" alt="Allyson" />
             </div>
             <div className="card-stacked">
               <div className="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
               </div>
               <div className="card-action">
@@ -43,6 +45,7 @@ class Us extends React.Component {
             </div>
             <div className="card-stacked">
               <div className="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde nesciunt minus ab animi autem sed modi perspiciatis a, deserunt magnam, provident ut nam quis minima aspernatur repudiandae iusto quam fugit.</p>
               </div>
               <div className="card-action">
@@ -66,7 +69,7 @@ class About extends React.Component {
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam esse, veniam laudantium harum. Odit similique, est, delectus laudantium debitis tempora suscipit eum doloremque beatae aliquam dolorem eius aperiam ipsum quae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, veniam quasi, alias architecto voluptates, perferendis nemo inventore aliquam minus consequatur similique! Sed tempore, sapiente reprehenderit alias possimus perspiciatis assumenda nostrum.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis doloremque quo dolore nostrum quisquam voluptatum officia suscipit eius possimus adipisci, porro minus autem quam deleniti voluptatibus eaque amet earum labore.</p>
         <hr/>
-        <h2>Meet the Team</h2>
+        <h2>Meet the Developers</h2>
         <Us />
       </div>
 
