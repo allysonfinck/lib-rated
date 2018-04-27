@@ -114,7 +114,7 @@ class BookList extends React.Component{
                 {this.props.books.map(
                     (book, index)=>{
                         return <li
-                        onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible')}}>{book.title}</li>
+                        onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookFormVisible')}}>{book.title}</li>
                     }
                 )}
 
@@ -143,7 +143,8 @@ class GoogleBooks extends React.Component{
         // this.formChange= this.formChange.bind(this)
 
         this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}, toggleState:false,
-                        bookListVisible: true, bookVisible:false, createFormVisible: true, editFormVisible:true
+                        bookListVisible: true, bookVisible:false,
+                        bookFormVisible: true, editFormVisible:true
                     }
     }
 
@@ -211,16 +212,16 @@ class GoogleBooks extends React.Component{
     updateBookDB(book){
         console.log("updatebook executed");
         console.log(book);
-        // fetch('/books/'+ book.id, {body:JSON.stringify(book), method:'PUT',
-        //     headers:
-        //         {
-        //             'Accept':'application/json, text/plain, */*',
-        //             'Content-Type': 'application/json'
-        //         }
-        // })
-        // .then(response=> response.json())
-        // .then(updatedbook=>{this.getPeople()})
-        // .catch(error=>{console.log(error)})
+        fetch('/books/'+ book.id, {body:JSON.stringify(book), method:'PUT',
+            headers:
+                {
+                    'Accept':'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+        })
+        .then(response=> response.json())
+        .then(updatedbook=>{this.getBooks()})
+        .catch(error=>{console.log(error)})
     }
 
     deleteBook(book, index){
@@ -237,6 +238,7 @@ class GoogleBooks extends React.Component{
     toggleState(st1, st2){
         console.log("toggle executed");
         this.setState({[st1]: !this.state[st1]})
+        this.setState({[st2]: !this.state[st2]})
     }
 // *******************************************
     render(){
@@ -259,10 +261,12 @@ class GoogleBooks extends React.Component{
                  />
             :""}
 
-             <BookForm
-                create= {this.createBook}
-                submitDB ={this.addBookDB}
-             />
+            {this.state.bookFormVisible?
+                 <BookForm
+                    create= {this.createBook}
+                    submitDB ={this.addBookDB}
+                 />
+             :""}
          </div>)
     }
 
