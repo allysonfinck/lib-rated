@@ -104,21 +104,24 @@ console.log(this.props.submitDB);*/}
     }
 }
 
-// <li onClick={()=>{this.props.getBook(book)}}>{book.title}</li>
 class BookList extends React.Component{
     render(){
             {/*} console.log(this.props.getBook)*/}
         return <div>
             <h3>Testing BookList</h3>
-            <ul>
+            <div>
                 {this.props.books.map(
                     (book, index)=>{
-                        return <li
-                        onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookFormVisible')}}>{book.title}</li>
+                        return <div>
+                             <li onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookFormVisible')}}>
+                                    {book.title}
+                            </li>
+                            <button onClick={()=>this.props.deleteBook(book, index)}>DELETE</button><br/>
+                        </div>
                     }
                 )}
 
-            </ul>
+            </div>
         </div>
     }
 }
@@ -225,6 +228,7 @@ class GoogleBooks extends React.Component{
     }
 
     deleteBook(book, index){
+        console.log("delete executed");
         fetch('/books/'+ book.id, {method:'DELETE'})
         .then(
             data=>{
@@ -251,6 +255,7 @@ class GoogleBooks extends React.Component{
                  toggleState={this.toggleState}
                  books={this.state.foundBooks}
                  getBook={this.getBook}
+                 deleteBook={this.deleteBook}
             />
 
             {this.state.bookVisible?
