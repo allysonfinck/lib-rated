@@ -53,20 +53,22 @@ class BookForm extends React.Component{
 
     render(){
     console.log(this.props.book);
+
+
         return <div>
         <h3>Testing BookForm</h3>
         <form  onSubmit={()=>this.formSubmit(event)}>
-            <input onChange={()=>this.formChange(event)}  value ={this.state.title} type="text"  placeholder="title" id="title"/> <br/>
+            <input onChange={this.formChange}  value ={this.state.title} type="text"  placeholder="title" id="title"/> <br/>
 
-            <input onChange={()=>this.formChange(event)}  value ={this.state.author} type="text"  placeholder="author"  id="author"/> <br/>
+            <input onChange={this.formChange}  value ={this.state.author} type="text"  placeholder="author"  id="author"/> <br/>
 
-            <input onChange={()=>this.formChange(event)}  value ={this.state.publisher} type="text"  placeholder="publisher"  id ="publisher"/> <br/>
+            <input onChange={this.formChange}  value ={this.state.publisher} type="text"  placeholder="publisher"  id ="publisher"/> <br/>
 
-            <input onChange={()=>this.formChange(event)}  value ={this.state.date_published} type="text"  placeholder="date_published" id="date_published"/> <br/>
+            <input onChange={this.formChange}   value ={this.state.date_published} type="text"  placeholder="date_published" id="date_published"/> <br/>
 
-            <input onChange={()=>this.formChange(event)}  value ={this.state.description} type="text"  placeholder="description"  id="description"/>  <br/>
+            <input onChange={this.formChange}   value ={this.state.description} type="text"  placeholder="description"  id="description"/>  <br/>
 
-            <input onChange={()=>this.formChange(event)}  value ={this.state.cover_art} type="text"  placeholder="cover_art" id="cover_art"/> <br/>
+            <input onChange={this.formChange}   value ={this.state.cover_art} type="text"  placeholder="cover_art" id="cover_art"/> <br/>
 
             <input type="Submit" value="Add Book" />
         </form>
@@ -96,9 +98,8 @@ console.log(this.props.submitDB);*/}
             <BookForm
                 book= {this.props.book}
                 submitDB = {this.props.submitDB}
-            >
+            />
 
-            </BookForm>
         </div>
     }
 }
@@ -112,7 +113,8 @@ class BookList extends React.Component{
             <ul>
                 {this.props.books.map(
                     (book, index)=>{
-                        return <li onClick={()=>this.props.getBook(book)}>{book.title}</li>
+                        return <li
+                        onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible')}}>{book.title}</li>
                     }
                 )}
 
@@ -141,7 +143,7 @@ class GoogleBooks extends React.Component{
         // this.formChange= this.formChange.bind(this)
 
         this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}, toggleState:false,
-                        bookListVisible: true, bookVisible:true, createFormVisible: true, editFormVisible:true
+                        bookListVisible: true, bookVisible:false, createFormVisible: true, editFormVisible:true
                     }
     }
 
@@ -232,8 +234,9 @@ class GoogleBooks extends React.Component{
         )
     }
 
-    toggleState(){
-
+    toggleState(st1, st2){
+        console.log("toggle executed");
+        this.setState({[st1]: !this.state[st1]})
     }
 // *******************************************
     render(){
@@ -243,14 +246,18 @@ class GoogleBooks extends React.Component{
              <CustomBookAPI/>
 
              <BookList
+                 toggleState={this.toggleState}
                  books={this.state.foundBooks}
                  getBook={this.getBook}
             />
 
-             <Book
-                 book ={this.state.selectedBook}
-                 submitDB={this.updateBookDB}
-             />
+            {this.state.bookVisible?
+                 <Book
+                     toggleState={this.toggleState}
+                     book ={this.state.selectedBook}
+                     submitDB={this.updateBookDB}
+                 />
+            :""}
 
              <BookForm
                 create= {this.createBook}
