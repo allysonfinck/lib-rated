@@ -1,16 +1,80 @@
 body {
-  padding-top: 50px;
-  bottom: 0;
-}
-
-section {
-  text-align: center;
-  padding: 60px;
+  padding-top: 200px;
 }
 
 form {
   width: 400px;
+  margin: 100px auto;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+hr {
+  width: 80%;
+}
+
+p {
+  padding: 15px;
+}
+
+.brand-logo {
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: 1.5s;
+}
+
+.brand-logo:hover {
+  color: #a33e44;
+}
+
+.btn {
+  transition: all .5s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.tab {
+  transition-property: background-color;
+  transition-duration: 1s;
+}
+
+.tab:hover {
+  background-color: #a33e44;
+}
+
+a {
+  transition-property: color;
+  transition-duration: 1.5s;
+}
+
+a:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.us-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
+}
+
+.cardfave, .header {
+  margin: 20px auto;
+  width: 80%;
+}
+
+.search {
+  text-align: center;
+  padding: 60px;
 }
 
 .navbar-fixed {
@@ -22,9 +86,8 @@ form {
     bottom: 0;
     margin: 0 auto;
     width: 100%;
-    background: lightgrey;
     text-align: center;
-    color: black;
+    color: white;
     padding: 40px;
 }
 
@@ -59,7 +122,7 @@ form {
     text-decoration: none;
 }
 
-.carousel {
+.carousel-section {
   border: 1px solid lightgray;
   height: 300px;
 }
