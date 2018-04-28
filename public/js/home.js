@@ -45,10 +45,27 @@ class Home extends React.Component {
     this.queryBooks = this.queryBooks.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.getBooks = this.getBooks.bind(this)
+    this.getBook = this.getBook.bind(this)
+    this.createBook =this.createBook.bind(this)
+    this.addBookDB = this.addBookDB.bind(this)
+    this.updateBookDB=this.updateBookDB.bind(this)
+    this.deleteBook = this.deleteBook.bind(this)
+    this.toggleState=this.toggleState.bind(this)
+
     this.state = {
       query: '',
-      googleBooks: []
+      googleBooks: [],
+      foundBooks:[],
+      selectedBook:{},
+      toggleState:false,
+        bookListVisible: true, bookVisible:true,
+        bookFormVisible: true, editFormVisible:true
     }
+  }
+
+  componentDidMount(){
+          this.getBooks()
   }
 
   queryBooks(query) {
@@ -76,9 +93,81 @@ class Home extends React.Component {
     event.preventDefault()
     this.queryBooks(this.state.query)
   }
+  //====================== CRUD ROUTES FOR CUSTOM API =============================
+      getBooks(){
+          fetch('/books').then(response=>{response.json().then(data=>{
+              // console.log(data)
+              this.setState({foundBooks:data})
+          })})
+      }
 
+
+
+      getBook(book){
+          this.setState({selectedBook:book})
+      }
+
+
+      createBook(book){
+          console.log("createBook executed");
+          const updatedBooks = this.state.foundBooks
+          updatedBooks.unshift(book)
+          this.setState({foundBooks: updatedBooks})
+
+      }
+
+      addBookDB(book){
+          fetch('/books', {body: JSON.stringify(book), method: 'POST',
+                      headers:
+                          {
+                              'Accept': 'application/json, text/plain, */*',
+                              'Content-Type': 'application/json'
+                          }
+      })
+      .then(response=>{return response.json()})
+      .then(response=>this.createBook(response))
+      .catch(error=>console.log(error))
+      }
+
+
+
+
+      updateBookDB(book){
+          console.log("updatebook executed");
+          console.log(book);
+          fetch('/books/'+ book.id, {body:JSON.stringify(book), method:'PUT',
+              headers:
+                  {
+                      'Accept':'application/json, text/plain, */*',
+                      'Content-Type': 'application/json'
+                  }
+          })
+          .then(response=> response.json())
+          .then(updatedbook=>{this.getBooks()})
+          .catch(error=>{console.log(error)})
+      }
+
+      deleteBook(book, index){
+          console.log("delete executed");
+          fetch('/books/'+ book.id, {method:'DELETE'})
+          .then(
+              data=>{
+                  this.setState(
+                      {foundbooks:[ ...this.state.foundBooks.slice(0, index), ...this.state.foundBooks.slice(index+1)]}
+                  )
+              }
+          )
+      }
+
+      toggleState(st1, st2){
+          console.log("toggle executed");
+          this.setState({[st1]: !this.state[st1]})
+          this.setState({[st2]: !this.state[st2]})
+      }
+  // *******************************************
   render() {
     return (
+          <div>
       <section className="search">
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
@@ -87,6 +176,32 @@ class Home extends React.Component {
         <SearchResult queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
       </section>
 
+
+           <h1> HELLO</h1>
+
+
+           <Library
+               toggleState={this.toggleState}
+               books={this.state.foundBooks}
+               getBook={this.getBook}
+               deleteBook={this.deleteBook}
+          />
+
+          {this.state.bookVisible?
+               <LibraryDetail
+                   toggleState={this.toggleState}
+                   book ={this.state.selectedBook}
+                   submitDB={this.updateBookDB}
+               />
+          :""}
+
+          {this.state.bookFormVisible?
+               <RatingForm
+                  create= {this.createBook}
+                  submitDB ={this.addBookDB}
+               />
+           :""}
+       </div>
     )
   }
 }
