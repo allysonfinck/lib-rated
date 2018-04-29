@@ -1,8 +1,7 @@
 
 
 class LibraryDetail extends React.Component{
-
     render(){
-        return <h1>Test LibraryDetail</h1>
+        return <h1>TESTING LIBRARY DETAIL</h1>
     }
 }

@@ -60,7 +60,7 @@ class Home extends React.Component {
       foundBooks:[],
       selectedBook:{},
       toggleState:false,
-        bookListVisible: true, bookVisible:true,
+        bookListVisible: true, bookVisible:false,
         bookFormVisible: true, editFormVisible:true
     }
   }
@@ -180,22 +180,23 @@ class Home extends React.Component {
 
            <h1> HELLO</h1>
 
+         {this.state.bookListVisible?
            <Library
                toggleState={this.toggleState}
                books={this.state.foundBooks}
                getBook={this.getBook}
                deleteBook={this.deleteBook}
-          />
+          />:""}
+
+        {this.state.bookVisible ?
+          <LibraryDetail
+                  toggleState={this.toggleState}
+                  book ={this.state.selectedBook}
+                  submitDB={this.updateBookDB}
+         />:""}
 
 
 
-          {this.state.bookVisible?
-               <LibraryDetail
-                   toggleState={this.toggleState}
-                   book ={this.state.selectedBook}
-                   submitDB={this.updateBookDB}
-               />
-          :""}
 
           {this.state.bookFormVisible?
                <RatingForm
