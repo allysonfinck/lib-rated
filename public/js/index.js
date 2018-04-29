@@ -5,7 +5,7 @@ class Index extends React.Component {
     this.state = {
       homePageVisible: true,
       aboutPageVisible: false,
-      libraryPageVisible: false,
+      libraryPageVisible: true,
       profilePageVisible: false
     }
   }
@@ -25,7 +25,7 @@ class Index extends React.Component {
         <Nav toggleState={this.toggleState} />
         {this.state.homePageVisible ? <Home /> : ""}
         {this.state.aboutPageVisible ? <About /> : ""}
-        {this.state.libraryPageVisible ? <Library /> : ""}
+        {/*{this.state.libraryPageVisible ? <Library /> : ""} */}
         {this.state.profilePageVisible ? <Profile /> : ""}
       </div>
     )

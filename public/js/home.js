@@ -1,4 +1,5 @@
 
+
 class SearchResult extends React.Component {
   render() {
     // console.log(this.props.googleBooks);
@@ -96,7 +97,7 @@ class Home extends React.Component {
   //====================== CRUD ROUTES FOR CUSTOM API =============================
       getBooks(){
           fetch('/books').then(response=>{response.json().then(data=>{
-              // console.log(data)
+              console.log(data)
               this.setState({foundBooks:data})
           })})
       }
@@ -179,13 +180,14 @@ class Home extends React.Component {
 
            <h1> HELLO</h1>
 
-
            <Library
                toggleState={this.toggleState}
                books={this.state.foundBooks}
                getBook={this.getBook}
                deleteBook={this.deleteBook}
           />
+
+
 
           {this.state.bookVisible?
                <LibraryDetail
