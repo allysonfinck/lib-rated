@@ -1,6 +1,21 @@
 
 
 class SearchResult extends React.Component {
+    constructor(props){
+        super(props)
+        this.setBookState = this.setBookState.bind(this)
+        this.state={title:""}
+    }
+
+    setBookState(){
+        this.setState({
+            title:this.
+        })
+        console.log(this.state);
+        // this.props.addBookDB(this.state)
+    }
+
+
   render() {
     // console.log(this.props.googleBooks);
     return (
@@ -21,11 +36,14 @@ class SearchResult extends React.Component {
                       <li>Publisher: {book.volumeInfo.publisher}</li>
                       <li>Genre: {book.volumeInfo.categories[0]}</li>
                       <li>Publish Date: {book.volumeInfo.publishedDate}</li>
-                      <li>Pages: {book.volumeInfo.pageCount}</li>
                       <li>Google Rating: {book.volumeInfo.averageRating}</li>
                     </ul>
                     <p>{book.volumeInfo.description}</p>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
+                    <a
+                        onClick = {()=>this.setBookState(book.volumeInfo.title)}
+
+                        className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
+                    </a>
                   </div>
                   <div className="card-action">
                     <a href={book.volumeInfo.canonicalVolumeLink}>Google</a>
@@ -53,6 +71,7 @@ class Home extends React.Component {
     this.updateBookDB=this.updateBookDB.bind(this)
     this.deleteBook = this.deleteBook.bind(this)
     this.toggleState=this.toggleState.bind(this)
+    // this.getNewBook =this.getNewBook.bind(this)
 
     this.state = {
       query: '',
@@ -61,7 +80,9 @@ class Home extends React.Component {
       selectedBook:{},
       toggleState:false,
         bookListVisible: true, bookVisible:false,
-        bookFormVisible: true, editFormVisible:true
+        bookFormVisible: true, editFormVisible:true,
+        title:""
+
     }
   }
 
@@ -107,6 +128,20 @@ class Home extends React.Component {
       getBook(book){
           this.setState({selectedBook:book})
       }
+
+      // getNewBook(googleTitle){
+      //       console.log(this.state.title);
+      //
+      //       console.log(googleTitle);
+      //
+      //       this.setState({title:googleTitle})
+      //
+      //       console.log(this.state.title);
+      //
+      //
+      //
+      //   }
+
 
 
       createBook(book){
@@ -174,19 +209,20 @@ class Home extends React.Component {
           <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
           <input className="btn waves-effect waves-light" type="submit" name="action" />
         </form>
-        <SearchResult queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
+        <SearchResult  addBookDB={this.addBookDB}  queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
       </section>
 
 
            <h1> HELLO</h1>
 
-         {this.state.bookListVisible?
+          {this.state.bookListVisible?
            <Library
                toggleState={this.toggleState}
                books={this.state.foundBooks}
                getBook={this.getBook}
                deleteBook={this.deleteBook}
           />:""}
+
 
         {this.state.bookVisible ?
           <LibraryDetail

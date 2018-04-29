@@ -148,8 +148,10 @@
 //         this.state ={query:'harry+potter', foundBooks:[], selectedBook:{}, toggleState:false,
 //                         bookListVisible: true, bookVisible:false,
 //                         bookFormVisible: true, editFormVisible:true
+//
 //                     }
 //     }
+//
 //
 //     componentDidMount(){
 //         {this.queryBooks(this.state.query)}
@@ -277,9 +279,9 @@
 //
 // }
 //
-//
-//
-// ReactDOM.render(
-//     <GoogleBooks/>,
-//     document.querySelector('main')
-// )
+// //
+// //
+// // ReactDOM.render(
+// //     <GoogleBooks/>,
+// //     document.querySelector('main')
+// // )
