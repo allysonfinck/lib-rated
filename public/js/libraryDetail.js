@@ -1,8 +1,47 @@
 
 
 class LibraryDetail extends React.Component{
-
     render(){
-        return <h1>Test LibraryDetail</h1>
+        console.log(this.props.book);
+        return <div>
+            <h1>TESTING LIBRARY DETAIL</h1>
+
+            <div className="col s12 m7">
+             <h3 className="header">{this.props.book.title}</h3>
+             <div className="card horizontal cardfave">
+               <div className="card-image">
+                 <img src={this.props.book.cover_art} />
+               </div>
+               <div className="card-stacked">
+                 <div className="card-content">
+                   <p>{this.props.book.description}</p>
+                   <ul>
+                     <li>Author: {this.props.book.author}</li>
+                     <li>Publisher: {this.props.book.publisher}</li>
+                     <li>Genre: {this.props.book.genre}</li>
+                     <li>Date Published: {this.props.book.date_published}</li>
+                   </ul>
+                   <span><a>Rating</a>: {this.props.book.rating}</span>
+                 </div>
+                 <div className="card-action">
+                   <a>This is a link</a>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+       </div>
+
+
     }
 }
+
+// Rating
+//  if rating is null then display Add Rating, else diplay edit Rating
+//  {this.hasRating}? <a onClick=> Edit Rating </a> : <a onClick>Add Rating </a>
+//      1.) Create a hasRating state in home set it to false pass it through to LibraryDetail
+//      2.) How to change it? Test if actual object is null ONLOAD of book.
+//  onClick event:
+//      Needs to toggle edit AND create form. Set edit for on this line only by calling it within the library detail.
+//      Can use the same form but need to call different functions!
+//  Review Creat and Edit methods
