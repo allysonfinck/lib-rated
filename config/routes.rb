@@ -17,4 +17,10 @@ Rails.application.routes.draw do
   post '/favorites', to: 'favorites#create'
   delete '/favorites/:id', to: 'favorites#delete'
   put '/favorites/:id', to: 'favorites#update'
+
+  get '/ratings', to: 'ratings#index'
+  get '/ratings/:id', to: 'ratings#show'
+  post '/ratings', to: 'ratings#create'
+  delete '/ratings/:id', to: 'ratings#delete'
+  put '/ratings/:id', to: 'ratings#update'
 end
