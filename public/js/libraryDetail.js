@@ -24,7 +24,29 @@ class LibraryDetail extends React.Component{
                      <li>Date Published: {this.props.book.date_published}</li>
                    </ul>
                    <span>
-                   {this.props.hasRating ? <a>Edit Rating</a> : <a>Add Rating</a>}
+                   {(this.props.showForm) ?
+                       <form>
+                            <label>Rating:
+                            <input type="text" placeholder="Enter Rating 1-5"  onSubmit={()=>this.props.formSubmit(event)}></input>
+                                <select value ="test" onChange="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <button type="submit">
+                                Submit
+                            </button>
+                        </form>
+
+
+                    : (this.props.hasRating) ?
+                           <a onClick={()=>this.props.toggleState('showForm')}>Edit Rating: </a>
+                         : <a onClick={()=>this.props.toggleState('showForm')}>Add Rating:</a>
+                     }
+
                    </span>
                  </div>
                  <div className="card-action">
@@ -57,3 +79,11 @@ class LibraryDetail extends React.Component{
 //      Needs to toggle edit AND create form. Set edit for on this line only by calling it within the library detail.
 //      Can use the same form but need to call different functions!
 //  Review Creat and Edit methods
+
+// <select>
+//     <option value="1">1</option>
+//     <option value="2">2</option>
+//     <option value="3">3</option>
+//     <option value="4">4</option>
+//     <option value="5">5</option>
+// </select><br/>
