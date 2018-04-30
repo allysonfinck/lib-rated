@@ -36,9 +36,11 @@ class Index extends React.Component {
             genre:[],
             date_published:"",
             description:"",
-            cover_art:""
+            cover_art:"",
+            rating:""
         },
-      hasRating:false
+      hasRating:false,
+      showForm:false
 
     }
   }
@@ -148,7 +150,22 @@ class Index extends React.Component {
       }
 
 
-
+      formSubmit(event){
+          event.preventDefault()
+          this.setState({
+              book:
+                {
+                  title:this.state.title,
+                  author:this.state.author,
+                  genre:this.state.genre,
+                  date_published:this.stat.date_published,
+                  description:this.state.description,
+                  cover_art:this.state.cover_art,
+                  rating:event.target.value
+                }
+          })
+          this.state.updateBookDB(this.state.book)
+      }
 
       updateBookDB(book){
           console.log("updatebook executed");
@@ -219,8 +236,9 @@ class Index extends React.Component {
            <LibraryDetail
                    toggleState={this.toggleState}
                    hasRating={this.state.hasRating}
+                   showForm={this.state.showForm}
                    book ={this.state.selectedBook}
-                   submitDB={this.updateBookDB}
+                   formSubmit={this.formSubmit}
           />:""
         }
         {/*}{this.state.bookFormVisible?
