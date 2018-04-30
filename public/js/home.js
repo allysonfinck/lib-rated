@@ -41,7 +41,11 @@ class SearchResult extends React.Component {
                     </ul>
                     <p>{book.volumeInfo.description}</p>
                     <a
-                        onClick = {()=>this.props.getNewBook(book.volumeInfo)}
+                        onClick = {()=>{
+                            this.props.getNewBook(book.volumeInfo);
+                            this.props.toggleState('libraryPageVisible', 'homePageVisible')
+                            }
+                        }
 
                         className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
                     </a>
@@ -75,6 +79,7 @@ class Home extends React.Component {
                     queryBooks={()=>this.props.queryBooks(this.props.query)} googleBooks={this.props.googleBooks}
                     getNewBook = {this.props.getNewBook}
                     addBookDB={this.props.addBookDB}
+                    toggleState={this.props.toggleState}
                  />
 
               </section>

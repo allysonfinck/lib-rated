@@ -19,6 +19,9 @@ class Index extends React.Component {
       aboutPageVisible: false,
       libraryPageVisible: false,
       profilePageVisible: false,
+      bookVisible:false,
+      bookFormVisible: true,
+      editFormVisible:true,
       query: '',
       googleBooks: [],
       foundBooks:[],
@@ -26,9 +29,7 @@ class Index extends React.Component {
       // Need to review, may need to change names or delete toggle states and merge with Eric's version.
       toggleState:false,
         bookListVisible: true,
-        bookVisible:false,
-        bookFormVisible: true,
-        editFormVisible:true,
+
         book:{
             title:"",
             author:[],
@@ -45,12 +46,14 @@ class Index extends React.Component {
           this.getBooks()
   }
 
-  toggleState(pg1, pg2, pg3, pg4) {
+  toggleState(pg1, pg2, pg3, pg4,pg5,pg6) {
     this.setState({
       [pg1]: true,
       [pg2]: false,
       [pg3]: false,
-      [pg4]: false
+      [pg4]: false,
+      [pg5]: false,
+      [pg6]: false
     })
   }
 
@@ -187,6 +190,7 @@ class Index extends React.Component {
             addBookDB={this.addBookDB}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            toggleState={this.toggleState}
             />
             : ""
         }
