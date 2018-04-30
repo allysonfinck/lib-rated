@@ -1,29 +1,48 @@
-# README
-# Libr\Rated
-### Project Team: Allyson Finck, Teila Angel, Eric Sanchez
-#####Allyson made a change
-#####Eric made a change
-#####Teila made a change
+# Unit 4 Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## [lib/Rated](https://lib-rated.herokuapp.com/)
 
-Things you may want to cover:
+#### Created By [Eric Sanchez](https://github.com/childofthe20th), [Teilachanell](https://github.com/tnangel1984), and [Allyson Finck](https://github.com/allysonfinck)
 
-* Ruby version
+---
 
-* System dependencies
 
-* Configuration
+#### About
 
-* Database creation
+lib/Rated allows users to search the database for books, and adding favorites to a personal library. This information includes title, author, published date, genre, description and cover image. Users can also add a personal rating to books on their favorites list, and update that rating accordingly
 
-* Database initialization
+---
 
-* How to run the test suite
+### Technologies Used
 
-* Services (job queues, cache servers, search engines, etc.)
+* HTML
+* CSS
+* Javascript
+* PostgreSQL
+* Ruby on Rails
+* React.js
 
-* Deployment instructions
 
-* ...
+---
+
+### Wireframe
+
+
+---
+
+### User Stories
+
+As a user, I can :
+* search for books based on keywords
+* view search results
+* view a show page for each search result
+* add a book to my personal library
+* view books in my personal library
+* add a rating to each book in my personal library
+* edit a rating to each book in library
+* delete a book from my library
+
+
+---
+
+### Future Updates
