@@ -166,6 +166,7 @@ class Index extends React.Component {
                   this.setState(
                       {foundbooks:[ ...this.state.foundBooks.slice(0, index), ...this.state.foundBooks.slice(index+1)]}
                   )
+                  console.log(this.state.foundBooks);
               }
           )
       }
