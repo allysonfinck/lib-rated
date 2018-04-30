@@ -9,7 +9,7 @@ class Library extends React.Component{
                 {this.props.books.map((book, index)=>{
                     return<div className="col s12 m7">
                           <img src={book.cover_art}
-                           onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookListVisible')}} />
+                           onClick={()=>{this.props.getBook(book); this.props.toggleState('bookPageVisible', 'libraryPageVisible')}} />
 
                     </div>})}
 

@@ -18,8 +18,8 @@ class Index extends React.Component {
       homePageVisible: true,
       aboutPageVisible: false,
       libraryPageVisible: false,
+      bookPageVisible:false,
       profilePageVisible: false,
-      bookVisible:false,
       bookFormVisible: true,
       editFormVisible:true,
       query: '',
@@ -207,7 +207,7 @@ class Index extends React.Component {
              : ""
          }
 
-        {this.state.bookVisible ?
+        {this.state.bookPageVisible ?
            <LibraryDetail
                    toggleState={this.toggleState}
                    book ={this.state.selectedBook}
