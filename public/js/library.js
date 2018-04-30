@@ -1,20 +1,17 @@
 
 class Library extends React.Component{
-
-    render(){
-        console.log(this.props.books);
-        return <div>
-                <h1>Testing LIBRARY</h1>
-
-                {this.props.books.map((book, index)=>{
-                    return<div className="col s12 m7">
-                          <img src={book.cover_art}
-                           onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookListVisible')}} />
-
-                    </div>})}
+  render(){
+    console.log(this.props.books);
+    return <div>
+      <h1>My Books</h1>
+      {this.props.books.map((book, index)=>{
+        return (
+            <img className="thumbnail" src={book.cover_art} onClick={()=>{this.props.getBook(book); this.props.toggleState('bookVisible', 'bookListVisible')}}/>
+        )
+      })}
 
 
-        </div>
+    </div>
 
 
     }
