@@ -8,9 +8,9 @@ class SearchResult extends React.Component {
     }
 
 
-    setBookState(){
+    setBookState(googleData){
 
-        this.setState({title: this.target.book.volumeInfo.title}, ()=>{
+        this.setState({title: googleData}, ()=>{
           console.log(this.state.title);
         })
 
@@ -45,7 +45,7 @@ class SearchResult extends React.Component {
                     </ul>
                     <p>{book.volumeInfo.description}</p>
                     <a
-                        onClick = {()=>this.setBookState()}
+                        onClick = {()=>this.setBookState(book.volumeInfo.title)}
 
                         className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
                     </a>
