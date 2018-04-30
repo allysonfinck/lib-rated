@@ -35,6 +35,8 @@ class Book
   end
 
   def self.create(opts = {})
+      p "self.create is running"
+      p '#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}'
     results = DB.exec(
       <<-SQL
         INSERT INTO books (title, author, date_published, genre, description, cover_art)
