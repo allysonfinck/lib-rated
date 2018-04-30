@@ -9,12 +9,18 @@
 
 #### About
 
-
+lib/Rated allows users to search the database for books, and adding favorites to a personal library. This information includes title, author, published date, genre, description and cover image. Users can also add a personal rating to books on their favorites list, and update that rating accordingly
 
 ---
 
 ### Technologies Used
 
+HTML
+CSS
+Javascript
+PostgreSQL
+Ruby on Rails
+React.js
 
 
 ---
@@ -24,8 +30,19 @@
 
 ---
 
-### Resources
+### User Stories
+
+As a user, I can :
+* search for books based on keywords
+* view search results
+* view a show page for each search result
+* add a book to my personal library
+* view books in my personal library
+* add a rating to each book in my personal library
+* edit a rating to each book in library
+* delete a book from my library
+
 
 ---
 
-### Project Setup / Steps
+### Future Updates
