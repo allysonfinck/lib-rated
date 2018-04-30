@@ -9,7 +9,7 @@ class SearchResult extends React.Component {
 
     setBookState(){
         this.setState({
-            title:this.
+            title: "test"
         })
         console.log(this.state);
         // this.props.addBookDB(this.state)
