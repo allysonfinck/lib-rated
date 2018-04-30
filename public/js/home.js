@@ -1,5 +1,26 @@
 
+
 class SearchResult extends React.Component {
+    constructor(props){
+        super(props)
+        this.setBookState = this.setBookState.bind(this)
+        this.state={title:""}
+    }
+
+
+    setBookState(googleData){
+
+        this.setState({title: googleData}, ()=>{
+          console.log(this.state.title);
+        })
+
+        // console.log(this.state.value);
+        //
+        // this.props.addBookDB(this.state);
+        // this.props.addBookDB(this.state)
+    }
+
+
   render() {
     // console.log(this.props.googleBooks);
     return (
@@ -20,11 +41,14 @@ class SearchResult extends React.Component {
                       <li>Publisher: {book.volumeInfo.publisher}</li>
                       <li>Genre: {book.volumeInfo.categories[0]}</li>
                       <li>Publish Date: {book.volumeInfo.publishedDate}</li>
-                      <li>Pages: {book.volumeInfo.pageCount}</li>
                       <li>Google Rating: {book.volumeInfo.averageRating}</li>
                     </ul>
                     <p>{book.volumeInfo.description}</p>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
+                    <a
+                        onClick = {()=>this.props.getNewBook(book.volumeInfo)}
+
+                        className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
+                    </a>
                   </div>
                   <div className="card-action">
                     <a href={book.volumeInfo.canonicalVolumeLink}>Google</a>
@@ -52,6 +76,7 @@ class Home extends React.Component {
     this.updateBookDB=this.updateBookDB.bind(this)
     this.deleteBook = this.deleteBook.bind(this)
     this.toggleState=this.toggleState.bind(this)
+    this.getNewBook =this.getNewBook.bind(this)
 
     this.state = {
       query: '',
@@ -59,8 +84,16 @@ class Home extends React.Component {
       foundBooks:[],
       selectedBook:{},
       toggleState:false,
-        bookListVisible: true, bookVisible:true,
-        bookFormVisible: true, editFormVisible:true
+        bookListVisible: true, bookVisible:false,
+        bookFormVisible: true, editFormVisible:true,
+        book:{
+            title:"",
+            author:[],
+            genre:[],
+            date_published:"",
+            description:"",
+            cover_art:""
+        }
     }
   }
 
@@ -96,7 +129,7 @@ class Home extends React.Component {
   //====================== CRUD ROUTES FOR CUSTOM API =============================
       getBooks(){
           fetch('/books').then(response=>{response.json().then(data=>{
-              // console.log(data)
+              console.log(data)
               this.setState({foundBooks:data})
           })})
       }
@@ -106,6 +139,24 @@ class Home extends React.Component {
       getBook(book){
           this.setState({selectedBook:book})
       }
+
+      getNewBook(book){
+            console.log(book);
+            console.log(this.state.title);
+
+
+            this.setState({book:{title:book.title , author: book.authors[0], genre:book.categories[0], date_published: book.publishedDate, description: book.description , cover_art:book.imageLinks.thumbnail }}
+
+                , ()=>{
+              console.log(this.state.title);
+              this.addBookDB(this.state.book);
+
+            })
+
+
+
+    }
+
 
 
       createBook(book){
@@ -117,6 +168,8 @@ class Home extends React.Component {
       }
 
       addBookDB(book){
+          console.log("addBookDB executed");
+          console.log(book);
           fetch('/books', {body: JSON.stringify(book), method: 'POST',
                       headers:
                           {
@@ -173,27 +226,33 @@ class Home extends React.Component {
           <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
           <input className="btn waves-effect waves-light" type="submit" name="action" />
         </form>
-        <SearchResult queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
+            <SearchResult  addBookDB={this.addBookDB}  queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks}
+            getNewBook = {this.getNewBook}
+         />
+
       </section>
 
 
            <h1> HELLO</h1>
 
-
+          {this.state.bookListVisible?
            <Library
                toggleState={this.toggleState}
                books={this.state.foundBooks}
                getBook={this.getBook}
                deleteBook={this.deleteBook}
-          />
+          />:""}
 
-          {this.state.bookVisible?
-               <LibraryDetail
-                   toggleState={this.toggleState}
-                   book ={this.state.selectedBook}
-                   submitDB={this.updateBookDB}
-               />
-          :""}
+
+        {this.state.bookVisible ?
+          <LibraryDetail
+                  toggleState={this.toggleState}
+                  book ={this.state.selectedBook}
+                  submitDB={this.updateBookDB}
+         />:""}
+
+
+
 
           {this.state.bookFormVisible?
                <RatingForm
