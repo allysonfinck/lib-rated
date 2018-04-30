@@ -37,7 +37,8 @@ class Index extends React.Component {
             date_published:"",
             description:"",
             cover_art:""
-        }
+        },
+      hasRating:false
 
     }
   }
@@ -67,7 +68,7 @@ class Index extends React.Component {
             })
 
             console.log(this.state.googleBooks);
-        
+
           })
         }).catch((error)=>console.log(error))
       }
@@ -217,6 +218,7 @@ class Index extends React.Component {
         {this.state.bookPageVisible ?
            <LibraryDetail
                    toggleState={this.toggleState}
+                   hasRating={this.state.hasRating}
                    book ={this.state.selectedBook}
                    submitDB={this.updateBookDB}
           />:""
