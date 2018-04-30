@@ -7,11 +7,14 @@ class SearchResult extends React.Component {
         this.state={title:""}
     }
 
+
     setBookState(){
-        this.setState({
-            title: "test"
-        })
-        console.log(this.state);
+
+        this.setState({title: "test"})
+
+        console.log(this.state.value);
+        console.log(this.state.title);
+        this.props.addBookDB(this.state);
         // this.props.addBookDB(this.state)
     }
 
@@ -40,7 +43,7 @@ class SearchResult extends React.Component {
                     </ul>
                     <p>{book.volumeInfo.description}</p>
                     <a
-                        onClick = {()=>this.setBookState(book.volumeInfo.title)}
+                        onClick = {()=>this.setBookState()}
 
                         className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
                     </a>
@@ -153,16 +156,17 @@ class Home extends React.Component {
       }
 
       addBookDB(book){
-          fetch('/books', {body: JSON.stringify(book), method: 'POST',
-                      headers:
-                          {
-                              'Accept': 'application/json, text/plain, */*',
-                              'Content-Type': 'application/json'
-                          }
-      })
-      .then(response=>{return response.json()})
-      .then(response=>this.createBook(response))
-      .catch(error=>console.log(error))
+          console.log(book);
+      //     fetch('/books', {body: JSON.stringify(book), method: 'POST',
+      //                 headers:
+      //                     {
+      //                         'Accept': 'application/json, text/plain, */*',
+      //                         'Content-Type': 'application/json'
+      //                     }
+      // })
+      // .then(response=>{return response.json()})
+      // .then(response=>this.createBook(response))
+      // .catch(error=>console.log(error))
       }
 
 
