@@ -7,8 +7,15 @@ form {
   margin: 100px auto;
 }
 
-h1, h2 {
+h1, h2, h5 {
   text-align: center;
+}
+
+h5 {
+  padding: 20px;
+  border-top: 2px solid lightgray;
+  margin: auto;
+  width: 60%;
 }
 
 h2 {
@@ -21,6 +28,12 @@ hr {
 
 p {
   padding: 15px;
+}
+
+.card-container {
+  background: whitesmoke;
+  margin: 50px auto;
+  padding: 50px;
 }
 
 .brand-logo {
@@ -69,7 +82,11 @@ a:hover {
 
 .cardfave, .header {
   margin: 20px auto;
-  width: 80%;
+  width: 60%;
+}
+
+.card {
+  margin-bottom: 100px;
 }
 
 .search {
