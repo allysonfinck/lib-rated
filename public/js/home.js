@@ -1,5 +1,100 @@
 
+
+class CreateForm extends React.Component {
+  constructor(props) {
+    super(props)
+    // this.handleCreateSubmit = this.handleCreateSubmit.bind(this)
+    // this.handleCreate = this.handleCreate.bind(this)
+  }
+
+  // handleCreate(book) {
+  //   const favedBooks = this.state.myBooks
+  //   favedBooks.unshift(book)
+  //   this.setState({
+  //     myBooks: favedBooks
+  //   })
+  // }
+  //
+  // handleCreateSubmit(book) {
+  //   fetch('/books', {
+  //     method: 'POST',
+  //     title: JSON.stringify(book.title),
+  //     headers: {
+  //       'Accept': 'application/json, text/plain, */*',
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then((response)=> {
+  //     return response.json()
+  //     console.log(this.myBooks);
+  //     console.log(this.favedBook);
+  //   }).catch((error)=> console.log(error))
+  // }
+
+  render() {
+    return (
+      <div className="row">
+        <form className="col s12">
+          <div className="input-field col s16">
+            <input value={this.props.favedBook.title} type="text" className="validate"/>
+          </div>
+          <div className="row">
+            <div className="input-field col s8">
+              <input value={this.props.favedBook.author} type="text" className="validate"/>
+            </div>
+            <div className="input-field col s8">
+              <input value={this.props.favedBook.date_published} type="text" className="validate"/>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s8">
+              <input value={this.props.favedBook.genre} type="text" className="validate"/>
+            </div>
+          </div>
+          <div className="row">
+            <textarea value={this.props.favedBook.description} cols="16" rows="10"></textarea>
+          </div>
+          <div className="row">
+            <input value={this.props.favedBook.thumbnail} type="text" className="validate"/>
+          </div>
+          <input className="btn" type="submit"/>
+        </form>
+      </div>
+    )
+  }
+}
+
 class SearchResult extends React.Component {
+  constructor(props) {
+    super(props)
+    this.toggleForm = this.toggleForm.bind(this)
+    this.createBook = this.createBook.bind(this)
+    this.state = {
+      bookFormVisible: false,
+      favedBook: {}
+    }
+  }
+
+  createBook(book) {
+    this.setState({
+      favedBook: {
+        title: book.title,
+        author: book.authors,
+        date_published: book.publishedDate,
+        genre: book.categories,
+        description: book.description,
+        cover_art: book.imageLinks
+      }
+    })
+    console.log(book);
+    console.log(this.state.favedBook);
+  }
+
+  toggleForm(event) {
+    this.setState({
+      [event]: !this.state[event]
+    })
+  }
+
   render() {
     // console.log(this.props.googleBooks);
     return (
@@ -24,10 +119,11 @@ class SearchResult extends React.Component {
                       <li>Google Rating: {book.volumeInfo.averageRating}</li>
                     </ul>
                     <p>{book.volumeInfo.description}</p>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i></a>
+                    <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons" onClick={()=>{this.toggleForm('bookFormVisible'); this.createBook(book.volumeInfo)}}>add</i></a>
                   </div>
                   <div className="card-action">
                     <a href={book.volumeInfo.canonicalVolumeLink}>Google</a>
+                    {this.state.bookFormVisible ? <CreateForm favedBook={this.state.favedBook}/> : ""}
                   </div>
                 </div>
               </div>
@@ -45,27 +141,11 @@ class Home extends React.Component {
     this.queryBooks = this.queryBooks.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.getBooks = this.getBooks.bind(this)
-    this.getBook = this.getBook.bind(this)
-    this.createBook =this.createBook.bind(this)
-    this.addBookDB = this.addBookDB.bind(this)
-    this.updateBookDB=this.updateBookDB.bind(this)
-    this.deleteBook = this.deleteBook.bind(this)
-    this.toggleState=this.toggleState.bind(this)
 
     this.state = {
       query: '',
-      googleBooks: [],
-      foundBooks:[],
-      selectedBook:{},
-      toggleState:false,
-        bookListVisible: true, bookVisible:true,
-        bookFormVisible: true, editFormVisible:true
+      googleBooks: []
     }
-  }
-
-  componentDidMount(){
-          this.getBooks()
   }
 
   queryBooks(query) {
@@ -93,115 +173,18 @@ class Home extends React.Component {
     event.preventDefault()
     this.queryBooks(this.state.query)
   }
-  //====================== CRUD ROUTES FOR CUSTOM API =============================
-      getBooks(){
-          fetch('/books').then(response=>{response.json().then(data=>{
-              // console.log(data)
-              this.setState({foundBooks:data})
-          })})
-      }
 
-
-
-      getBook(book){
-          this.setState({selectedBook:book})
-      }
-
-
-      createBook(book){
-          console.log("createBook executed");
-          const updatedBooks = this.state.foundBooks
-          updatedBooks.unshift(book)
-          this.setState({foundBooks: updatedBooks})
-
-      }
-
-      addBookDB(book){
-          fetch('/books', {body: JSON.stringify(book), method: 'POST',
-                      headers:
-                          {
-                              'Accept': 'application/json, text/plain, */*',
-                              'Content-Type': 'application/json'
-                          }
-      })
-      .then(response=>{return response.json()})
-      .then(response=>this.createBook(response))
-      .catch(error=>console.log(error))
-      }
-
-
-
-
-      updateBookDB(book){
-          console.log("updatebook executed");
-          console.log(book);
-          fetch('/books/'+ book.id, {body:JSON.stringify(book), method:'PUT',
-              headers:
-                  {
-                      'Accept':'application/json, text/plain, */*',
-                      'Content-Type': 'application/json'
-                  }
-          })
-          .then(response=> response.json())
-          .then(updatedbook=>{this.getBooks()})
-          .catch(error=>{console.log(error)})
-      }
-
-      deleteBook(book, index){
-          console.log("delete executed");
-          fetch('/books/'+ book.id, {method:'DELETE'})
-          .then(
-              data=>{
-                  this.setState(
-                      {foundbooks:[ ...this.state.foundBooks.slice(0, index), ...this.state.foundBooks.slice(index+1)]}
-                  )
-              }
-          )
-      }
-
-      toggleState(st1, st2){
-          console.log("toggle executed");
-          this.setState({[st1]: !this.state[st1]})
-          this.setState({[st2]: !this.state[st2]})
-      }
-  // *******************************************
   render() {
     return (
-          <div>
-      <section className="search">
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
-          <input className="btn waves-effect waves-light" type="submit" name="action" />
-        </form>
-        <SearchResult queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
-      </section>
-
-
-           <h1> HELLO</h1>
-
-
-           <Library
-               toggleState={this.toggleState}
-               books={this.state.foundBooks}
-               getBook={this.getBook}
-               deleteBook={this.deleteBook}
-          />
-
-          {this.state.bookVisible?
-               <LibraryDetail
-                   toggleState={this.toggleState}
-                   book ={this.state.selectedBook}
-                   submitDB={this.updateBookDB}
-               />
-          :""}
-
-          {this.state.bookFormVisible?
-               <RatingForm
-                  create= {this.createBook}
-                  submitDB ={this.addBookDB}
-               />
-           :""}
-       </div>
+      <div>
+        <section className="search">
+          <form onSubmit={this.handleSubmit}>
+            <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
+            <input className="btn waves-effect waves-light" type="submit" name="action" />
+          </form>
+          <SearchResult queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
+        </section>
+      </div>
     )
   }
 }
