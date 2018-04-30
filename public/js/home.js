@@ -10,11 +10,13 @@ class SearchResult extends React.Component {
 
     setBookState(){
 
-        this.setState({title: "test"})
+        this.setState({title: this.target.book.volumeInfo.title}, ()=>{
+          console.log(this.state.title);
+        })
 
-        console.log(this.state.value);
-        console.log(this.state.title);
-        this.props.addBookDB(this.state);
+        // console.log(this.state.value);
+        //
+        // this.props.addBookDB(this.state);
         // this.props.addBookDB(this.state)
     }
 
