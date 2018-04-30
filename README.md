@@ -1,29 +1,48 @@
-# README
-# Libr\Rated
-### Project Team: Allyson Finck, Teila Angel, Eric Sanchez
-#####Allyson made a change
-#####Eric made a change
-#####Teila made a change
+# Unit 4 Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## [lib/Rated](https://lib-rated.herokuapp.com/)
 
-Things you may want to cover:
+#### Created By [Eric Sanchez](https://github.com/childofthe20th), [Teilachanell](https://github.com/tnangel1984), and [Allyson Finck](https://github.com/allysonfinck)
 
-* Ruby version
+---
 
-* System dependencies
+### Concept
 
-* Configuration
+#### About
 
-* Database creation
+**D**ream **O**nward provides a space where you can visualize your dreams.
 
-* Database initialization
+---
 
-* How to run the test suite
+### Technologies Used
 
-* Services (job queues, cache servers, search engines, etc.)
+HTML  
+CSS  
+JS
 
-* Deployment instructions
+**Front End**  
+[React](https://reactjs.org/)  
 
-* ...
+**Back End**  
+[Ruby on Rails](http://rubyonrails.org/)  
+
+**Database**  
+[PostgreSQL](https://www.postgresql.org/)  
+
+**Dependencies**  
+
+---
+
+### Wireframe
+
+![wireframe](/images/wireframe/wireframe.png)
+
+---
+
+### Resources
+
+---
+
+### Project Setup / Steps
+
+[Deploy your rails and psql app on heroku guide.](https://github.com/samwhindleton/dream-onward/blob/master/deploy-rails-psql-app-on-heroku-guide.md)
