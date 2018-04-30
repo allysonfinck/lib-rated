@@ -15,12 +15,12 @@ lib/Rated allows users to search the database for books, and adding favorites to
 
 ### Technologies Used
 
-HTML
-CSS
-Javascript
-PostgreSQL
-Ruby on Rails
-React.js
+* HTML
+* CSS
+* Javascript
+* PostgreSQL
+* Ruby on Rails
+* React.js
 
 
 ---
