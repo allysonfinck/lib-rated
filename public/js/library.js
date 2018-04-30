@@ -15,15 +15,7 @@ class Library extends React.Component{
                                    this.props.toggleState('bookPageVisible', 'libraryPageVisible')
                                }
                            }
-                           /><br/>
-
-                           <button  type="Submit" onClick={()=>
-                               {
-                                   this.props.deleteBook(book, index);
-                                
-                               }
-                           }>Delete</button>
-
+                           />
 
 
                     </div>})}
