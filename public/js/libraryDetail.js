@@ -23,7 +23,9 @@ class LibraryDetail extends React.Component{
                      <li>Genre: {this.props.book.genre}</li>
                      <li>Date Published: {this.props.book.date_published}</li>
                    </ul>
-                   <span><a>Rating</a>: {this.props.book.rating}</span>
+                   <span>
+                   {this.props.hasRating ? <a>Edit Rating</a> : <a>Add Rating</a>}
+                   </span>
                  </div>
                  <div className="card-action">
                    <a>This is a link</a>
