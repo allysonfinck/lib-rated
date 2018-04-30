@@ -35,7 +35,11 @@ class SearchResult extends React.Component {
                     <ul>
                       <li>Author: {book.volumeInfo.authors}</li>
                       <li>Publisher: {book.volumeInfo.publisher}</li>
-                      <li>Genre: {book.volumeInfo.categories[0]}</li>
+
+
+         {book.volumeInfo.categories ? <li>Genre: {book.volumeInfo.categories[0]}  </li> : ""}
+
+
                       <li>Publish Date: {book.volumeInfo.publishedDate}</li>
                       <li>Google Rating: {book.volumeInfo.averageRating}</li>
                     </ul>

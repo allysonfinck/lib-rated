@@ -65,8 +65,9 @@ class Index extends React.Component {
               // googleBooks: data.items[0].volumeInfo
               googleBooks: data.items
             })
+
             console.log(this.state.googleBooks);
-            console.log(this.state.googleBooks[0].volumeInfo);
+        
           })
         }).catch((error)=>console.log(error))
       }
@@ -103,7 +104,12 @@ class Index extends React.Component {
             console.log(this.state.title);
 
 
-            this.setState({book:{title:book.title , author: book.authors[0], genre:book.categories[0], date_published: book.publishedDate, description: book.description , cover_art:book.imageLinks.thumbnail }}
+            this.setState({book:{title:book.title.replace(/\'/g, "") ,
+            author: book.authors[0].replace(/\'/g, ""),
+            genre:book.categories[0].replace(/\'/g, ""),
+            date_published: book.publishedDate.replace(/\'/g, ""),
+            description: book.description.replace(/\'/g, "") ,
+             cover_art:book.imageLinks.thumbnail }}
 
                 , ()=>{
               console.log(this.state.title);
