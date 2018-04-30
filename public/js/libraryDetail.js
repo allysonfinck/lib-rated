@@ -27,7 +27,15 @@ class LibraryDetail extends React.Component{
                  </div>
                  <div className="card-action">
                    <a>This is a link</a>
-                 </div>
+
+                 <button  type="Submit" onClick={()=>
+                     {
+                         this.props.deleteBook(book, index);
+
+                     }
+
+                 }>Delete</button>
+                  </div>
                </div>
              </div>
            </div>
