@@ -4,16 +4,18 @@ class LibraryDetail extends React.Component{
     render(){
         console.log(this.props.book);
         return <div>
-            <h1>TESTING LIBRARY DETAIL</h1>
-
+            <h1>Look Inside: {this.props.book.title}</h1>
+            <a onClick={()=>{this.props.toggleState('libraryPageVisible', 'bookPageVisible')}}>Back to Library</a>
             <div className="col s12 m7">
-             <h3 className="header">{this.props.book.title}</h3>
+
              <div className="card horizontal cardfave">
                <div className="card-image">
                  <img src={this.props.book.cover_art} />
                </div>
                <div className="card-stacked">
+               <h5> Title: {this.props.book.title}</h5>
                  <div className="card-content">
+
                    <p>{this.props.book.description}</p>
                    <ul>
                      <li>Author: {this.props.book.author}</li>
@@ -25,7 +27,15 @@ class LibraryDetail extends React.Component{
                  </div>
                  <div className="card-action">
                    <a>This is a link</a>
-                 </div>
+
+                 <button  type="Submit" onClick={()=>
+                     {
+                         this.props.deleteBook(book, index);
+
+                     }
+
+                 }>Delete</button>
+                  </div>
                </div>
              </div>
            </div>
