@@ -45,7 +45,7 @@ class SearchResult extends React.Component {
                     </ul>
                     <p>{book.volumeInfo.description}</p>
                     <a
-                        onClick = {()=>this.setBookState(book.volumeInfo.title)}
+                        onClick = {()=>this.props.getNewBook(book.volumeInfo)}
 
                         className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">add</i>
                     </a>
@@ -76,7 +76,7 @@ class Home extends React.Component {
     this.updateBookDB=this.updateBookDB.bind(this)
     this.deleteBook = this.deleteBook.bind(this)
     this.toggleState=this.toggleState.bind(this)
-    // this.getNewBook =this.getNewBook.bind(this)
+    this.getNewBook =this.getNewBook.bind(this)
 
     this.state = {
       query: '',
@@ -86,8 +86,14 @@ class Home extends React.Component {
       toggleState:false,
         bookListVisible: true, bookVisible:false,
         bookFormVisible: true, editFormVisible:true,
-        title:""
-
+        book:{
+            title:"",
+            author:[],
+            genre:[],
+            date_published:"",
+            description:"",
+            cover_art:""
+        }
     }
   }
 
@@ -134,18 +140,22 @@ class Home extends React.Component {
           this.setState({selectedBook:book})
       }
 
-      // getNewBook(googleTitle){
-      //       console.log(this.state.title);
-      //
-      //       console.log(googleTitle);
-      //
-      //       this.setState({title:googleTitle})
-      //
-      //       console.log(this.state.title);
-      //
-      //
-      //
-      //   }
+      getNewBook(book){
+            console.log(book);
+            console.log(this.state.title);
+
+
+            this.setState({book:{title:book.title , author: book.authors[0], genre:book.categories[0], date_published: book.publishedDate, description: book.description , cover_art:book.imageLinks.thumbnail }}
+
+                , ()=>{
+              console.log(this.state.title);
+              this.addBookDB(this.state.book);
+
+            })
+
+
+
+    }
 
 
 
@@ -158,17 +168,18 @@ class Home extends React.Component {
       }
 
       addBookDB(book){
+          console.log("addBookDB executed");
           console.log(book);
-      //     fetch('/books', {body: JSON.stringify(book), method: 'POST',
-      //                 headers:
-      //                     {
-      //                         'Accept': 'application/json, text/plain, */*',
-      //                         'Content-Type': 'application/json'
-      //                     }
-      // })
-      // .then(response=>{return response.json()})
-      // .then(response=>this.createBook(response))
-      // .catch(error=>console.log(error))
+          fetch('/books', {body: JSON.stringify(book), method: 'POST',
+                      headers:
+                          {
+                              'Accept': 'application/json, text/plain, */*',
+                              'Content-Type': 'application/json'
+                          }
+      })
+      .then(response=>{return response.json()})
+      .then(response=>this.createBook(response))
+      .catch(error=>console.log(error))
       }
 
 
@@ -215,7 +226,10 @@ class Home extends React.Component {
           <input onChange={this.handleChange} type="text" placeholder="Search Google Books"/>
           <input className="btn waves-effect waves-light" type="submit" name="action" />
         </form>
-        <SearchResult  addBookDB={this.addBookDB}  queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks} />
+            <SearchResult  addBookDB={this.addBookDB}  queryBooks={()=>this.state.queryBooks(this.state.query)} googleBooks={this.state.googleBooks}
+            getNewBook = {this.getNewBook}
+         />
+
       </section>
 
 
