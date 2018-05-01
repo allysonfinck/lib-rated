@@ -27,7 +27,7 @@ lib/Rated allows users to search the database for books, and adding favorites to
 
 ### Wireframe
 
-![wireframe](/images/wireframe.jpg)
+![wireframe](/public/images/wireframe.jpg)
 ---
 
 ### User Stories
