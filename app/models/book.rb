@@ -1,5 +1,5 @@
 class Book
-  attr_reader :id, :title, :author, :date_published, :genre, :description, :cover_art
+  attr_reader :id, :title, :author, :date_published, :genre, :description, :cover_art, :rating
 
   if(ENV['DATABASE_URL'])
     uri = URI.parse(ENV['DATABASE_URL'])
@@ -22,6 +22,9 @@ class Book
       @description = opts['description']
     end
     @cover_art = opts['cover_art']
+    if opts['rating']
+      @rating = opts['rating'].to_i
+    end
   end
 
   def self.all
@@ -35,13 +38,11 @@ class Book
   end
 
   def self.create(opts = {})
-      p "self.create is running"
-      p '#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}'
     results = DB.exec(
       <<-SQL
-        INSERT INTO books (title, author, date_published, genre, description, cover_art)
-        VALUES ('#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}')
-        RETURNING id, title, author, date_published, genre, description, cover_art;
+        INSERT INTO books (title, author, date_published, genre, description, cover_art, rating)
+        VALUES ('#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}', #{opts["rating"]})
+        RETURNING id, title, author, date_published, genre, description, cover_art, rating;
       SQL
     )
     return Book.new(results.first)
@@ -56,9 +57,9 @@ class Book
     results = DB.exec(
       <<-SQL
         UPDATE books
-        SET title='#{opts["title"]}', author='#{opts["author"]}', date_published='#{opts["date_published"]}', genre='#{opts["genre"]}', description='#{opts["description"]}', cover_art='#{opts["cover_art"]}'
+        SET title='#{opts["title"]}', author='#{opts["author"]}', date_published='#{opts["date_published"]}', genre='#{opts["genre"]}', description='#{opts["description"]}', cover_art='#{opts["cover_art"]}', rating=#{opts["rating"]}
         WHERE id=#{id}
-        RETURNING id, title, author, date_published, genre, description, cover_art;
+        RETURNING id, title, author, date_published, genre, description, cover_art, rating;
       SQL
     )
     return Book.new(results.first)
