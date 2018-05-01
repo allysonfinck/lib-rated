@@ -107,11 +107,18 @@ a:hover {
   margin: 20px;
   box-shadow: 5px 5px 5px gray;
   transition: all .5s;
+  width: 150px;
+  height: 230px;
 }
 
 .thumbnail:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.delete{
+    text-align: center;
+    margin: 0 30%;
 }
 
 #footer {
@@ -171,4 +178,9 @@ a:hover {
 .back-home {
   float: right;
   margin: 15px;
+}
+
+.aboutText p{
+    text-align: center;
+    
 }

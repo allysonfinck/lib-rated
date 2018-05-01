@@ -20,7 +20,7 @@ class Library extends React.Component{
                               }
                           }
                           />
-                          <span><a onClick={()=>
+                          <span><a className="delete" onClick={()=>
                                 {
                                     this.props.deleteBook(book, index);
 

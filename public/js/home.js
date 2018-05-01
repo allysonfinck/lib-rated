@@ -37,7 +37,9 @@ class SearchResult extends React.Component {
                       <li>Publisher: {book.volumeInfo.publisher}</li>
 
 
-         {book.volumeInfo.categories ? <li>Genre: {book.volumeInfo.categories[0]}  </li> : ""}
+                      {book.volumeInfo.categories ?
+                      <li>Genre: {book.volumeInfo.categories[0]}</li>
+                      : ""}
 
 
                       <li>Publish Date: {book.volumeInfo.publishedDate}</li>
