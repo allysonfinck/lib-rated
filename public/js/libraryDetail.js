@@ -23,18 +23,25 @@ class LibraryDetail extends React.Component{
                      <li>Genre: {this.props.book.genre}</li>
                      <li>Date Published: {this.props.book.date_published}</li>
                    </ul>
-                   <span><a>Rating</a>: {this.props.book.rating}</span>
+                   <span>
+                    {(this.props.showForm) ?
+                       <form  onSubmit={()=>this.props.formSubmit(event, this.props.book)}>
+                            <label>Rating:{this.props.rating}
+                            <input type="text" onChange={()=>this.props.formChange(event, this.props.book)} value={this.props.rating} placeholder="Enter Rating 1-5" id="rating" ></input>
+
+                            </label>
+                            <button type="submit">Submit</button>
+                        </form>
+
+                     : <a onClick={()=>this.props.toggleState('showForm')}>Edit Rating: {this.props.book.rating}</a>
+                    }
+
+
+                   </span>
                  </div>
                  <div className="card-action">
                    <a>This is a link</a>
 
-                 <button  type="Submit" onClick={()=>
-                     {
-                         this.props.deleteBook(book, index);
-
-                     }
-
-                 }>Delete</button>
                   </div>
                </div>
              </div>
@@ -45,13 +52,3 @@ class LibraryDetail extends React.Component{
 
     }
 }
-
-// Rating
-//  if rating is null then display Add Rating, else diplay edit Rating
-//  {this.hasRating}? <a onClick=> Edit Rating </a> : <a onClick>Add Rating </a>
-//      1.) Create a hasRating state in home set it to false pass it through to LibraryDetail
-//      2.) How to change it? Test if actual object is null ONLOAD of book.
-//  onClick event:
-//      Needs to toggle edit AND create form. Set edit for on this line only by calling it within the library detail.
-//      Can use the same form but need to call different functions!
-//  Review Creat and Edit methods

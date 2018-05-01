@@ -28,7 +28,7 @@ class SearchResult extends React.Component {
               {book.volumeInfo.subtitle ? <h5>{book.volumeInfo.subtitle}</h5> : ''}
               <div className="card horizontal cardfave">
                 <div className="card-image">
-                  <img src={book.volumeInfo.imageLinks.thumbnail} />
+                  {(book.volumeInfo.imageLinks === undefined) ? <img src="../images/no-image.jpg" alt={book.volumeInfo.title} /> : <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />}
                 </div>
                 <div className="card-stacked">
                   <div className="card-content">
