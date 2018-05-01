@@ -13,10 +13,10 @@ class Nav extends React.Component {
           </div>
           <div className="nav-content">
             <ul className="tabs tabs-transparent">
-              <li className="tab" href="#" onClick={()=>this.props.toggleState('homePageVisible', 'aboutPageVisible', 'libraryPageVisible', 'profilePageVisible')}><a>Home</a></li>
-              <li className="tab" href="#" onClick={()=>this.props.toggleState('aboutPageVisible', 'homePageVisible', 'libraryPageVisible', 'profilePageVisible')}><a>About</a></li>
-              <li className="tab" href="#" onClick={()=>this.props.toggleState('libraryPageVisible', 'aboutPageVisible', 'homePageVisible', 'profilePageVisible')}><a>Library</a></li>
-              <li className="tab" href="#" onClick={()=>this.props.toggleState('profilePageVisible', 'aboutPageVisible', 'libraryPageVisible', 'homePageVisible')}><a>Profile</a></li>
+              <li className="tab" href="#" onClick={()=>this.props.toggleState('homePageVisible', 'aboutPageVisible', 'libraryPageVisible', 'profilePageVisible', 'bookPageVisible')}><a>Home</a></li>
+              <li className="tab" href="#" onClick={()=>this.props.toggleState('aboutPageVisible', 'homePageVisible', 'libraryPageVisible', 'profilePageVisible','bookPageVisible')}><a>About</a></li>
+              <li className="tab" href="#" onClick={()=>this.props.toggleState('libraryPageVisible', 'aboutPageVisible', 'homePageVisible', 'profilePageVisible','bookPageVisible')}><a>Library</a></li>
+              <li className="tab" href="#" onClick={()=>this.props.toggleState('profilePageVisible', 'aboutPageVisible', 'libraryPageVisible', 'homePageVisible','bookPageVisible')}><a>Profile</a></li>
             </ul>
           </div>
         </nav>
