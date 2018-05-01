@@ -41,7 +41,7 @@ class Us extends React.Component {
           <h3 className="header">Teilachanell Angel</h3>
           <div className="card horizontal cardfave">
             <div className="card-image">
-              <img src="../images/TeilaProfile.jpeg" alt="Teila" />
+              <img src="../images/TeilaProfile0.jpeg" alt="Teila" />
             </div>
             <div className="card-stacked">
               <div className="card-content">

@@ -110,17 +110,14 @@ class Index extends React.Component {
 
       getNewBook(book){
             console.log(book);
-            console.log(this.state.title);
-
-
             this.setState({
               book: {
-                title: book.title.replace(/\'/g, "") ,
-                author: book.authors[0].replace(/\'/g, ""),
-                genre: book.categories[0].replace(/\'/g, ""),
-                date_published: book.publishedDate.replace(/\'/g, ""),
-                description: book.description.replace(/\'/g, "") ,
-                cover_art: book.imageLinks.thumbnail,
+                title: ( book.title) ? book.title.replace(/\'/g, ""):"" ,
+                author: (book.authors)? book.authors[0].replace(/\'/g, ""):"",
+                genre: (book.categories) ? book.categories[0].replace(/\'/g, "") : "",
+                date_published: (book.publishedDate) ? book.publishedDate.replace(/\'/g, ""):"",
+                description: (book.description) ? book.description.replace(/\'/g, ""):"" ,
+                cover_art: (book.imageLinks)? book.imageLinks.thumbnail: "../images/no-image.jpg",
                 rating:0
               }
             }
@@ -188,7 +185,7 @@ class Index extends React.Component {
          this.updateBookDB(this.state.book)
          this.setState({showForm:false})
          this.setState({hasRating:true})
-    
+
 
 
       }
