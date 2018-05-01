@@ -27,7 +27,7 @@ lib/Rated allows users to search the database for books, and adding favorites to
 
 ### Wireframe
 
-
+![wireframe](/images/wireframe.jpg)
 ---
 
 ### User Stories
@@ -46,3 +46,10 @@ As a user, I can :
 ---
 
 ### Future Updates
+
+* Adding user login
+* Profile page
+* Favorites list of books for each users
+* Google login
+* Carousel view of books
+* Dropdown rating of library book
