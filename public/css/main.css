@@ -36,6 +36,10 @@ p {
   padding: 50px;
 }
 
+.card-image img {
+  width: 10px;
+}
+
 .brand-logo {
   cursor: pointer;
   transition-property: color;
@@ -69,7 +73,7 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: gray;
   cursor: pointer;
 }
 
@@ -150,7 +154,14 @@ a:hover {
   text-decoration: none;
 }
 
-.carousel-section {
-  border: 1px solid lightgray;
-  height: 300px;
+.library-container {
+  margin: 0 auto;
+  margin-bottom: 100px;
+  width: 90%;
+
+}
+
+.back-home {
+  float: right;
+  margin: 15px;
 }

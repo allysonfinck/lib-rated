@@ -107,12 +107,16 @@ class Index extends React.Component {
             console.log(this.state.title);
 
 
-            this.setState({book:{title:book.title.replace(/\'/g, "") ,
-            author: book.authors[0].replace(/\'/g, ""),
-            genre:book.categories[0].replace(/\'/g, ""),
-            date_published: book.publishedDate.replace(/\'/g, ""),
-            description: book.description.replace(/\'/g, "") ,
-             cover_art:book.imageLinks.thumbnail }}
+            this.setState({
+              book: {
+                title: book.title.replace(/\'/g, "") ,
+                author: book.authors[0].replace(/\'/g, ""),
+                genre: book.categories[0].replace(/\'/g, ""),
+                date_published: book.publishedDate.replace(/\'/g, ""),
+                description: book.description.replace(/\'/g, "") ,
+                cover_art: book.imageLinks.thumbnail
+              }
+            }
 
                 , ()=>{
               console.log(this.state.title);
