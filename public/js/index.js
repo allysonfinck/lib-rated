@@ -13,6 +13,8 @@ class Index extends React.Component {
     this.deleteBook = this.deleteBook.bind(this)
     this.toggleState2=this.toggleState2.bind(this)
     this.getNewBook =this.getNewBook.bind(this)
+    this.formSubmit= this.formSubmit.bind(this)
+    this.formChange=this.formChange.bind(this)
 
     this.state = {
       homePageVisible: true,
@@ -37,7 +39,7 @@ class Index extends React.Component {
             date_published:"",
             description:"",
             cover_art:"",
-            rating:""
+            rating:0
         },
       hasRating:false,
       showForm:false
@@ -99,7 +101,11 @@ class Index extends React.Component {
 
 
       getBook(book){
-          this.setState({selectedBook:book})
+
+          this.setState({selectedBook:book}, ()=>{
+          console.log(this.state.selectedBook);
+      })
+
       }
 
       getNewBook(book){
@@ -114,7 +120,8 @@ class Index extends React.Component {
                 genre: book.categories[0].replace(/\'/g, ""),
                 date_published: book.publishedDate.replace(/\'/g, ""),
                 description: book.description.replace(/\'/g, "") ,
-                cover_art: book.imageLinks.thumbnail
+                cover_art: book.imageLinks.thumbnail,
+                rating:0
               }
             }
 
@@ -153,28 +160,45 @@ class Index extends React.Component {
       .catch(error=>console.log(error))
       }
 
-
-      formSubmit(event){
-          event.preventDefault()
-          this.setState({
-              book:
-                {
-                  title:this.state.title,
-                  author:this.state.author,
-                  genre:this.state.genre,
-                  date_published:this.stat.date_published,
-                  description:this.state.description,
-                  cover_art:this.state.cover_art,
-                  rating:event.target.value
+      formChange(event, book){
+            this.setState({
+                book:
+                  {
+                    title:book.title,
+                    author:book.author,
+                    genre:book.genre,
+                    date_published:book.date_published,
+                    description:book.description,
+                    cover_art:book.cover_art,
+                    rating:event.target.value,
+                    id:book.id
                 }
-          })
-          this.state.updateBookDB(this.state.book)
+            },
+            ()=>{ console.log(this.state.book)}
+        )
+
+      }
+
+
+      formSubmit(event, book){
+          event.preventDefault();
+          console.log("formSubmit executed");
+        console.log(this.state.book);
+
+         this.updateBookDB(this.state.book)
+         this.setState({showForm:false})
+         this.setState({hasRating:true})
+    
+
+
       }
 
       updateBookDB(book){
           console.log("updatebook executed");
           console.log(book);
-          fetch('/books/'+ book.id, {body:JSON.stringify(book), method:'PUT',
+          console.log(book.rating);
+          fetch('/books/'+ book.id,
+           {body:JSON.stringify(book), method:'PUT',
               headers:
                   {
                       'Accept':'application/json, text/plain, */*',
@@ -243,6 +267,8 @@ class Index extends React.Component {
                    showForm={this.state.showForm}
                    book ={this.state.selectedBook}
                    formSubmit={this.formSubmit}
+                   rating={this.state.book.rating}
+                   formChange={this.formChange}
           />:""
         }
         {/*}{this.state.bookFormVisible?

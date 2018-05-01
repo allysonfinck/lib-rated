@@ -23,7 +23,7 @@ class Book
     end
     @cover_art = opts['cover_art']
     if opts['rating']
-      @rating = opts['rating'].to_i
+      @rating = opts['rating']
     end
   end
 
@@ -41,7 +41,7 @@ class Book
     results = DB.exec(
       <<-SQL
         INSERT INTO books (title, author, date_published, genre, description, cover_art, rating)
-        VALUES ('#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}', #{opts["rating"]})
+        VALUES ('#{opts["title"]}', '#{opts["author"]}', '#{opts["date_published"]}', '#{opts["genre"]}', '#{opts["description"]}', '#{opts["cover_art"]}', '#{opts["rating"]}')
         RETURNING id, title, author, date_published, genre, description, cover_art, rating;
       SQL
     )
@@ -57,7 +57,7 @@ class Book
     results = DB.exec(
       <<-SQL
         UPDATE books
-        SET title='#{opts["title"]}', author='#{opts["author"]}', date_published='#{opts["date_published"]}', genre='#{opts["genre"]}', description='#{opts["description"]}', cover_art='#{opts["cover_art"]}', rating=#{opts["rating"]}
+        SET title='#{opts["title"]}', author='#{opts["author"]}', date_published='#{opts["date_published"]}', genre='#{opts["genre"]}', description='#{opts["description"]}', cover_art='#{opts["cover_art"]}', rating='#{opts["rating"]}'
         WHERE id=#{id}
         RETURNING id, title, author, date_published, genre, description, cover_art, rating;
       SQL
